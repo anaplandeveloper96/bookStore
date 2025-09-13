@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="getImplementationFlow" doc:id="7c9b888e-0457-4015-9799-d9e1ccfd14f9" >
+		<logger level="INFO" doc:name="flow Starts" doc:id="05ed08e8-d883-4aca-89a8-f189e66c1ed6" message='#["flow Starts"]'/>
+		<!-- [STUDIO:"read bookDetails"]<file:read doc:name="read bookDetails" doc:id="df847289-988d-48cf-837d-4b8d76ae273a" path="#[p('file.path')&#93;" outputMimeType="application/json"/> [STUDIO] -->
+		<!-- [STUDIO:"get bookDetails"]<ee:transform doc:name="get bookDetails" doc:id="ab15a940-dd99-4a56-89ac-571a9e1b56e7" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+&#45;&#45;-
+payload.books filter ((item, index) -> item.price >= 5000)&#93;&#93;></ee:set-payload>
+			</ee:message>
+		</ee:transform> [STUDIO] -->
+		<ee:transform doc:name="Transform Message" doc:id="b291835a-7992-4945-9fb9-7665124bb021" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "retrive the details successfully using GET method"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="logs response" doc:id="d2ce5bbb-7f92-46c6-bb40-686b0cd8034e" message="#[payload]" />
+	</flow>
+	<flow name="getIdImplementationFlow" doc:id="bb10c532-34d6-4ea7-9798-57a65c4597a4" >
+		<logger level="INFO" doc:name="flow Starts" doc:id="8e9790de-0561-48df-9d8c-4686d847c1e9" message="#[payload]"/>
+		<choice doc:name="Choice" doc:id="59554c6f-38b2-4fd8-bd21-8e8f959c8037" >
+			<when expression='#[vars.bookid != "null"]'>
+				<file:read doc:name="read bookDetails" doc:id="8a634923-5000-4b68-af6d-630ece7024b5" path="C:\Users\edmde\OneDrive\Desktop\bookDetails.txt" outputMimeType="application/json" />
+				<ee:transform doc:name="fetch details based on id" doc:id="65e8ee72-9128-4b2f-a211-620f8ee5903e">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+			</when>
+			<otherwise >
+				<raise-error doc:name="Raise error" doc:id="87a24f52-7118-47ae-952b-f8dffbc006ce" type="VALIDATION:INVALID_INPUT" description="${error.message}"/>
+			</otherwise>
+		</choice>
+		<ee:transform doc:name="filter bookIds" doc:id="ea2d23df-9aef-427f-9f44-84f0a986023c">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+var bookId = vars.bookid
+---
+(payload.books filter ((item,index) -> (item.id as String) == bookId))
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="logs response" doc:id="5b6dae25-6aa0-4d24-970b-dcc03f1b41e7" message="#[payload]"/>
+		<error-handler>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="54ec7393-7316-4b11-9461-acff2c43ab67" type="FILE:ACCESS_DENIED">
+				<ee:transform doc:name="Transform Message" doc:id="66b48d3d-7d57-411a-9a79-476d057b1d86" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"status": error.description
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<logger level="INFO" doc:name="Logger" doc:id="3c126d31-b180-4362-885b-a0145cb5a815" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+	<flow name="postImplementationFlow" doc:id="820d8cce-b992-43be-b7f3-9d72c952211b" >
+		<logger level="INFO" doc:name="flow Starts" doc:id="b6deac77-61d4-407c-873f-a4a1739d1496" message="#[payload]"/>
+		<file:write doc:name="create bookDetails" doc:id="71e90ff9-3c2c-403f-8388-c58e8a486cf1" path="C:\Users\edmde\OneDrive\Desktop\booksWrite.txt" mode="APPEND"/>
+		<ee:transform doc:name="add newBook" doc:id="4e78ee4c-b111-446a-88b7-d909618e82b9" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"id": "66yu7u",
+	"message": "New Book Added to the collection successfully"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="logs response" doc:id="a4895ca9-6d78-4a6f-a09a-541e3499b3b0" message="#[payload]"/>
+	</flow>
+	<flow name="deleteIdImplementationFlow" doc:id="3135008d-2343-478f-87bd-91847f27bcca" >
+		<logger level="INFO" doc:name="flow Starts" doc:id="937ca3ae-fdeb-4e67-bd51-8801a2aed86b" message="#[payload]"/>
+		<file:read doc:name="read bookDetails" doc:id="fc2092d8-648d-45c5-99e0-1ceef9409eb3" path="C:\Users\edmde\OneDrive\Desktop\bookDetails.txt" outputMimeType="application/json"/>
+		<ee:transform doc:name="filter book details based on id" doc:id="976ab503-5fca-46e8-85a5-8f9bcb436780" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+var bookId = attributes.uriParams.bookid 
+---
+(payload.books filter ((item,index) -> (item.id as String) == (bookId as String)))
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<ee:transform doc:name="delete bookDetails" doc:id="09602363-19d3-4965-acd8-1a91a298acc4" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "Book Deleted successfully"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="logs response" doc:id="2a81b003-7a71-4eed-90ca-5dc8961fd084" message="#[payload]"/>
+	</flow>
+	<flow name="patchIdImplementationFlow" doc:id="5379aace-15c5-400f-bf51-dc2990aa39b4" >
+		<logger level="INFO" doc:name="flow Starts" doc:id="4f3c3119-5288-4c58-b53f-ea679131843b" message="#[payload]"/>
+		<!-- [STUDIO:"read bookDetails"]<file:read doc:name="read bookDetails" doc:id="fe539001-7a7a-4f53-b3fc-101761aff387" path="C:\Users\edmde\OneDrive\Desktop\bookDetails.txt"/> [STUDIO] -->
+		<!-- [STUDIO:"filter book details based on id"]<ee:transform doc:name="filter book details based on id" doc:id="e74a7e21-fa3a-4310-abd2-c221c8922dc6" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+var bookId = attributes.uriParams.bookid 
+&#45;&#45;-
+(payload.books filter ((item,index) -> (item.id as String) == (bookId as String)))
+&#93;&#93;></ee:set-payload>
+			</ee:message>
+		</ee:transform> [STUDIO] -->
+		<!-- [STUDIO:"update bookDetails"]<ee:transform doc:name="update bookDetails" doc:id="6c6e4676-4e12-4b3d-ab8e-b0bea1740c7c" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+&#45;&#45;-
+{
+  "name": "ktih7y7y",
+  "message": "Book Details Updated successfully"
+  
+  }
+  
+  
+  
+  	
+&#93;&#93;></ee:set-payload>
+			</ee:message>
+		</ee:transform> [STUDIO] -->
+		<ee:transform doc:name="Transform Message" doc:id="2bb789d7-e117-4d0c-af01-cb2b4e719b62" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+     "message": "flow deployed successfully using PATCH method"
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="logs response" doc:id="b6d9a9bf-aacc-468b-9ff8-e9d02f521f6a" message="#[payload]"/>
+	</flow>
+</mule>

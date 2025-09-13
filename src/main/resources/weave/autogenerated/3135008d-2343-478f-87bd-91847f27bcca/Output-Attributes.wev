@@ -1,0 +1,23 @@
+%dw 2.0
+
+type auto_3135008d_2343_478f_87bd_91847f27bcca_Output_Attributes = {|
+  clientCertificate?: {|
+    publicKey?: {|  |}, 
+    "type"?: String, 
+    encoded?: Binary
+  |}, 
+  headers: {|  |}, 
+  listenerPath: String, 
+  method: String, 
+  queryParams: {|  |}, 
+  queryString: String, 
+  relativePath: String, 
+  remoteAddress: String, 
+  requestPath: String, 
+  requestUri: String, 
+  scheme: String, 
+  uriParams: {| bookid: String |}, 
+  version: String, 
+  localAddress: String
+|}
+

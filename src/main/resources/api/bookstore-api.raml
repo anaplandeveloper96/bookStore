@@ -1,0 +1,73 @@
+#%RAML 1.0
+title: Bookstore API
+mediaType: 
+- application/json
+
+types:
+  getBookDetailsResponse: !include /data type/getBookDetailsResponsedataType.raml
+  postBookDetailsRequest: !include /data type/postBookDetailsRequestdataType.raml
+  postBookDetsilsResponse: !include /data type/postBookDetailsResponsedataType.raml
+  getBookIdResponse: !include /data type/getBookIdResponsedataType.raml
+  patchBookDetailsResponse: !include /data type/patchBookDetailsResponsedataType.raml
+  deleteBookDetailsResponse: !include /data type/deleteBookDetailsResponsedataType.raml
+
+/bookStore:
+  get:
+    displayName: GET BOOKS 
+    description: this endpoint retrives the list of book details from store 
+    responses:
+      200:
+        body:
+          type: getBookDetailsResponse
+          example: !include /example/getBookDetailsResponsefile.json
+  post:
+    displayName: ADD NEWBOOK
+    description: this endpoint add new book details in the store
+    body:
+      type: postBookDetailsRequest
+      example: !include /example/postBookDetailsRequestfile.json
+    responses:
+      201:
+        body:
+          type: postBookDetsilsResponse
+          example: !include /example/postBookDetailsResponsefile.json
+  
+  /{bookid}:
+    uriParameters:
+      bookid:
+        type: string
+        required: true
+    get:
+      displayName: FETCH SPECIFIC BOOK
+      description: this endpoint fetch the specific book details from store
+      responses:
+        202:
+          body:
+            type: getBookIdResponse
+            example: !include /example/getBookIDResponsefile.json
+    patch:
+      displayName: UPDATE BOOK DETAILS
+      description: this endpoint update the existing book details in store
+      responses:
+        200:
+          body:
+            type: patchBookDetailsResponse
+            example: !include /example/patchBookDetailsResponsefile.json
+    delete:
+      displayName: DELETE BOOK 
+      description: thsi endpoint delete the book details from store
+      responses:
+        201:
+          body:
+            type: deleteBookDetailsResponse
+            example: !include /example/deleteBookDetailsResponsefile.json
+                
+  
+              
+          
+    
+  
+  
+
+
+              

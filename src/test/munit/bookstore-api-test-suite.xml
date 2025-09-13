@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="bookstore-api-test-suite.xml" />
+	<munit:test name="bookstore-api-test-suite-delete:\bookStore\(bookid):bookstore-api-configTest" doc:id="0e215331-6c19-4d5c-93a6-66cc4526f3c7" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="a197dccc-f271-4701-acda-b343beb52e19" processor="file:read">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="fc2092d8-648d-45c5-99e0-1ceef9409eb3" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="55ed5a09-a9ba-485b-a952-e782d9b2e8e9" >
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to delete:\bookStore\(bookid):bookstore-api-config" doc:id="57909d45-7bce-4929-9e8f-3263bdb88358" name="delete:\bookStore\(bookid):bookstore-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="d48bc979-8391-413e-8923-58a059880e98" is="#[MunitTools::notNullValue()]" expression="#[payload.Id == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-patch:\bookStore\(bookid):bookstore-api-configTest" doc:id="97f32f31-c5be-4add-a685-807832215f34" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="1e15c9f9-894e-4f3b-a91c-fe403fa5b40a" />
+			<flow-ref doc:name="Flow-ref to patch:\bookStore\(bookid):bookstore-api-config" doc:id="45e2ae5a-d780-460c-8710-c65c5b5f8fca" name="patch:\bookStore\(bookid):bookstore-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="48ffc0fe-f4d4-4d9e-96f2-0dc099f2679e" is="#[MunitTools::notNullValue()]" expression="#[payload.Id == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-get:\bookStore:bookstore-api-configTest" doc:id="8c369ee4-9585-49f2-b9ab-6ebf4b014eca" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="c2acc238-58b7-4a15-806a-6e0a711601fb" />
+			<flow-ref doc:name="Flow-ref to get:\bookStore:bookstore-api-config" doc:id="7d71e3de-adda-4d41-856a-54dc53da23b9" name="get:\bookStore:bookstore-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="49763deb-b0f2-493c-8047-a806d51ce803" is="#[MunitTools::notNullValue()]" expression="#[payload.Id == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-get:\bookStore\(bookid):bookstore-api-configTest" doc:id="f465f18e-853f-4bea-975c-6281c6a5f101" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="63881bb8-7aad-41e2-b36d-9f247130449f" processor="file:read">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="8a634923-5000-4b68-af6d-630ece7024b5" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="86f22a71-f6f9-484d-832a-7effa5bc7645" />
+			<flow-ref doc:name="Flow-ref to get:\bookStore\(bookid):bookstore-api-config" doc:id="8edd265c-6670-4224-bac3-82a7a1220663" name="get:\bookStore\(bookid):bookstore-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="425029fb-7a58-493f-824d-0134dc93a641" is="#[MunitTools::notNullValue()]" expression="#[payload.Id == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-post:\bookStore:application\json:bookstore-api-configTest" doc:id="203c750d-641a-4832-b1d3-cd93ecfe221f" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="4f3720ee-1d92-4ce9-8e36-036093fd6ba7" processor="file:write">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="71e90ff9-3c2c-403f-8388-c58e8a486cf1" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[MunitTools::getResourceAsString('postBookDetailsResponse.json')]" mediaType="application/json" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="1e001831-85c8-4608-abd3-c8c71a9fec33" >
+				<munit:payload value="#[MunitTools::getResourceAsString('postBookDetailsRequest.json')]" mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to post:\bookStore:application\json:bookstore-api-config" doc:id="6f4b4a3c-bad6-4637-b574-34bb8898b8e8" name="post:\bookStore:application\json:bookstore-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert expression" doc:id="2c48691a-db6e-4991-b5c0-3a4a8b3f0679" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-bookstore-api-mainTest" doc:id="79a151ab-a8d3-46b8-bcba-71eb6384f43c" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="9a2da838-973f-4ba5-ba7d-f359f9bbd64f" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bookstore-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to bookstore-api-main" doc:id="c9524ed0-3a98-4279-897a-beeffd007fb9" name="bookstore-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="73c7fc81-c023-42a6-8d7b-52f5385e9015" expression="#[payload == null]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-bookstore-api-consoleTest" doc:id="c07fb1f1-9686-4646-92f4-1906f0754ee0" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="0ab2b37b-b91e-4cfc-837d-95f1b5b50751" processor="apikit:console">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bookstore-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to bookstore-api-console" doc:id="2418e70f-9ada-4e8d-8295-513d84c14e20" name="bookstore-api-console"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="63a3ed84-50aa-405e-991b-be2b4a56596a" expression="#[payload == null]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-get:\bookStore\(bookid):bookstore-api-configTest1" doc:id="952f37e7-0b2a-4dd6-a68b-3e26024f23d3" description="Test" expectedErrorType="FILE:ACCESS_DENIED">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="829fc6a7-57ac-4a52-a2df-d44ebc4b06b5" processor="file:read">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="8a634923-5000-4b68-af6d-630ece7024b5" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="FILE:ACCESS_DENIED" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\bookStore\(bookid):bookstore-api-config" doc:id="696f137d-4f25-494a-9f81-715288a8d72b" name="get:\bookStore\(bookid):bookstore-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="80c3e1c4-d5cf-4cb8-8071-5fbbe4dd8222" is="#[MunitTools::notNullValue()]" expression="#[payload == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-post:\bookStore:application\json:bookstore-api-configTest1" doc:id="05e15814-6068-43bc-b78b-8370a383e9f9" description="Test" expectedErrorType="EXPRESSION">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="9aa10989-dd31-456d-bd55-a21db737e0bf" processor="file:write">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="71e90ff9-3c2c-403f-8388-c58e8a486cf1" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="EXPRESSION" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to post:\bookStore:application\json:bookstore-api-config" doc:id="f9ac942e-0869-44d2-9cea-4b5d47c18ebc" name="post:\bookStore:application\json:bookstore-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="66fa207a-943b-4b89-9b31-a1be704a0503" is="#[MunitTools::notNullValue()]" expression="#[payload == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-delete:\bookStore\(bookid):bookstore-api-configTest1" doc:id="bb9e1ac5-25d9-4814-ac51-368a32a8e6f5" description="Test" expectedErrorType="STREAM_MAXIMUM_SIZE_EXCEEDED">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="c175d128-42a3-4d80-8e8d-82bbd66de6ad" processor="file:read">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="fc2092d8-648d-45c5-99e0-1ceef9409eb3" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="STREAM_MAXIMUM_SIZE_EXCEEDED" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to delete:\bookStore\(bookid):bookstore-api-config" doc:id="4fa5773e-e3d7-4285-b56c-c0744bc1215d" name="delete:\bookStore\(bookid):bookstore-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="70129ee1-d4c2-44e3-946d-5caf718c6316" is="#[MunitTools::notNullValue()]" expression="#[payloadd == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-bookstore-api-consoleTest1" doc:id="77ca49f3-2706-4397-af15-7621297f5e9c" description="Test" expectedErrorType="APIKIT:NOT_FOUND">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="61293f23-f148-4d8e-8d16-4de9f7d7e8cf" processor="apikit:console">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bookstore-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to bookstore-api-console" doc:id="946b7acc-bd81-4d2f-b4ed-fb9c898da6a2" name="bookstore-api-console"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="8dace3de-025a-4415-b1be-1cd88eeb7c07" is="#[MunitTools::notNullValue()]" expression="#[payload == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-bookstore-api-mainTest1" doc:id="e065528e-0593-4c84-821f-3612456ece26" description="Test" expectedErrorType="APIKIT:BAD_REQUEST">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="3b17e16b-7985-451a-9801-f0e70089d5e0" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bookstore-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to bookstore-api-main" doc:id="9e15dec0-73dc-41e9-8b5a-1b35b6fe9e8a" name="bookstore-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="fd4484f4-53a8-4c44-9c64-123b9224c763" is="#[MunitTools::notNullValue()]" expression="#[payload == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-bookstore-api-mainTest2" doc:id="1a60e77f-5a2b-4474-9dd8-587a5668c048" description="Test" expectedErrorType="APIKIT:NOT_FOUND">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="287dcb09-75d2-434f-bab2-c048f9a7ac23" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bookstore-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to bookstore-api-main" doc:id="07c8c127-3b40-4bd0-ab92-7fb6f2adc78e" name="bookstore-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="5a9ba5a4-89b3-4b93-91f4-69c948a53968" is="#[MunitTools::notNullValue()]" expression="#[payload == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-bookstore-api-mainTest3" doc:id="d3299e8f-339b-4c81-8ae4-3bda162e717d" description="Test" expectedErrorType="APIKIT:METHOD_NOT_ALLOWED">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="78a2451f-e6e8-4593-b7c9-3a8cdd2ca57f" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bookstore-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to bookstore-api-main" doc:id="7cf6f3f5-f1c2-4d17-8e7d-182e55d0ba81" name="bookstore-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="e696e386-d5a2-44bc-9689-b56c0115eaf7" is="#[MunitTools::notNullValue()]" expression="#[payload == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-bookstore-api-mainTest4" doc:id="cf912882-f11b-4db5-b648-15882da3e99f" description="Test" expectedErrorType="APIKIT:NOT_ACCEPTABLE">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="58e5a582-d7b2-445d-9720-644120440876" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bookstore-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to bookstore-api-main" doc:id="210bb7a1-b26b-4138-93c7-1b5c42c7e2da" name="bookstore-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="d913a866-c53b-4aee-ae8b-a11d02ee8e9c" is="#[MunitTools::notNullValue()]" expression="#[payload == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-bookstore-api-mainTest5" doc:id="ebd876c6-d1db-436f-89e6-926c9f14185d" description="Test" expectedErrorType="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="d73c8844-8bf0-4e97-b6d3-2e69a5ae7e58" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bookstore-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to bookstore-api-main" doc:id="5cd3a210-362f-43cb-b20a-648a64630d5d" name="bookstore-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="00293537-7095-4430-b691-a9cf08a35ed8" is="#[MunitTools::notNullValue()]" expression="#[payload == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-bookstore-api-mainTest6" doc:id="139fbed6-2589-453b-9b27-6458e79e187c" description="Test" expectedErrorType="APIKIT:NOT_IMPLEMENTED">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="3c235e12-ca3f-45ab-92ef-dfb5b1bbfe54" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bookstore-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to bookstore-api-main" doc:id="587cd89a-67f4-4382-8e4e-ee64e34e9722" name="bookstore-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="c12dac46-bc55-47b5-bb39-45a2d08035c9" is="#[MunitTools::notNullValue()]" expression="#[payload == null]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookstore-api-test-suite-get:\bookStore\(bookid):bookstore-api-configTest2" doc:id="21473359-5d77-410c-8f99-0355c4baeb2c" description="Test" expectedErrorType="VALIDATION:INVALID_INPUT" ignore="true">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="f37ab44c-c1d3-4812-83cf-562b6d601c9b" processor="file:read">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="8a634923-5000-4b68-af6d-630ece7024b5" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="VALIDATION:INVALID_INPUT" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\bookStore\(bookid):bookstore-api-config" doc:id="0a0ee314-f829-417b-99ab-ca7efe153d3a" name="get:\bookStore\(bookid):bookstore-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="389538e1-a979-4f82-9ae5-fc6387983720" is="#[MunitTools::notNullValue()]" expression="#[payload == null]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

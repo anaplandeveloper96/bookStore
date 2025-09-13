@@ -1,0 +1,21 @@
+{
+  "books": [
+  {
+  "id": "1A1B1C1D1",
+  "title": "Ramayan",
+  "author": "Valmukhi",
+  "price": 2000
+},
+{ 
+  "id": "1A1B2C2D2",
+  "title": "BhagavathGeetha",
+  "author": "Vyasa Maharshi",
+  "price": 5000
+
+},
+{"id": "1A1B3C3D3",
+  "title": "Gitanjali",
+  "author": "Rabindranath",
+  "price": 10000 
+}
+] }
